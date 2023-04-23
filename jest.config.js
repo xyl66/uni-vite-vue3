@@ -43,7 +43,7 @@ module.exports = {
             executablePath: '', // 开发者工具cli路径，默认会自动查找
         },
     },
-    testTimeout: 15000,
+    testTimeout: 1000 * 15,
     reporters: ['default'],
     watchPathIgnorePatterns: ['/node_modules/', '/dist/', '/.git/'],
     moduleFileExtensions: ['js', 'json'],
