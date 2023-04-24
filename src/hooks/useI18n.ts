@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { i18n } from '@/locale';
 
 type I18nGlobalTranslation = {

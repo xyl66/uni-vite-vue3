@@ -3,8 +3,6 @@ import { ref } from 'vue';
 import BasicButton from '@/components/BasicButton/index.vue';
 import AppProvider from '@/components/AppProvider/inedx.vue';
 import { useRouter } from '@/hooks/router';
-import { CURRENT_PLATFORM, PLATFORMS } from '@/enums/platformEnum';
-import { judgePlatform } from '@/utils/platform';
 import Iconify from '@/components/Iconify/index.vue';
 import { getEnvValue } from '@/utils/env';
 import { useI18n } from '@/hooks/useI18n';
@@ -17,8 +15,6 @@ const appTitle = getEnvValue<string>('VITE_APP_TITLE');
 
 const title = ref(appTitle);
 
-const platform = CURRENT_PLATFORM;
-const isVue3 = judgePlatform(PLATFORMS.VUE3);
 const systemInfo = uni.getSystemInfoSync();
 const isAndroid = systemInfo.platform.toLowerCase() === 'android';
 

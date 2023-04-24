@@ -29,16 +29,23 @@ module.exports = {
         quotes: ['error', 'single'], //强制使用一致的反勾号、双引号或单引号
         'linebreak-style': ['error', 'unix'], //强制使用一致的换行风格,"unix"：\n 表示 LF , "windows"：\r\n 表示 CRLF
         eqeqeq: ['error', 'always', { null: 'ignore' }], //比较时强制使用 === 或者 !==,但对null作比较时可以不用全等
-        'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': [
-            'warn',
+            'error',
             {
                 argsIgnorePattern: '^_',
                 varsIgnorePattern: '^_',
             },
         ], //不允许使用未使用的变量
+        'no-unused-vars': [
+            'error',
+            {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+            },
+        ],
         '@typescript-eslint/no-explicit-any': 'off', //不允许任何类型
         '@typescript-eslint/no-empty-function': 'off', //不允许空函数
+        '@typescript-eslint/no-empty-interface': 0,
         'vue/html-indent': ['error', 4], //在<template>中强制一致缩进
         'vue/singleline-html-element-content-newline': 'off', //要求在单行元素的内容之前和之后有一个换行符
         'vue/max-attributes-per-line': 'off', //执行每行的最大属性数(被 prettier 最大单行控制了暂off)

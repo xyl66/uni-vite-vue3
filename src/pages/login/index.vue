@@ -46,7 +46,7 @@ const rules = reactive({
 });
 const authStore = useAuthStore();
 const { send: sendLogin } = useRequest(login, { immediate: false });
-const submitForm = (e: any) => {
+const submitForm = () => {
     form.value
         .validate()
         .then((params: any) => {
