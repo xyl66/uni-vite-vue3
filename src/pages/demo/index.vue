@@ -2,16 +2,25 @@
 import BasicButton from '@/components/BasicButton/index.vue';
 import AppProvider from '@/components/AppProvider/inedx.vue';
 import { useRouter } from '@/hooks/router';
+import { useI18n } from '@/hooks/useI18n';
+import { ref } from 'vue';
+import { onShow } from '@dcloudio/uni-app';
+const { t } = useI18n();
 
+const title = ref();
 const router = useRouter();
 const jumpList1 = () => {
     router.push('/pagesA/list/test1/index?key=words&page=1&limit=15');
 };
+onShow(() => {
+    console.log('onShow');
+    title.value = t('index.demo');
+});
 </script>
 
 <template>
     <AppProvider>
-        <view class="container"> 页面构建中... </view>
+        <view class="container"> {{ title }} </view>
         <view class="_u_center">
             <BasicButton @click="jumpList1">List1 → </BasicButton>
         </view>
