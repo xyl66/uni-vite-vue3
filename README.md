@@ -1,4 +1,4 @@
-# 🌈 uni-app Vue3 Vite4 pinia2 TypeScript 基础框架
+# uni-app Vue3 Vite TypeScript 基础框架
 
 <p align="center">
     <a href="https://cn.vuejs.org/" target="_blank">
@@ -22,12 +22,6 @@
     <a href="https://iconify.design/" target="_blank">
         <img src="https://img.shields.io/badge/-Iconify-1769aa?logo=Iconify" />
     </a>
-    <a href="https://gitee.com/h_mo/uniapp-vue3-vite-ts-template" target="_blank">
-    	<img src="https://svg.hamm.cn/gitee.svg?type=star&user=h_mo&project=uniapp-vue3-vite-ts-template"/>
-    </a>
-    <a href="https://gitee.com/h_mo/uniapp-vue3-vite-ts-template" target="_blank">
-    	<img src="https://svg.hamm.cn/gitee.svg?type=fork&user=h_mo&project=uniapp-vue3-vite-ts-template"/>
-    </a>
     <a href="https://ext.dcloud.net.cn/plugin?id=8559" target="_blank">
         <img src="https://svg.hamm.cn/badge.svg?key=Platform&value=uni-app"/>
     </a>
@@ -35,20 +29,11 @@
 
 ## 简介
 
--   **uni-app Vue3 Vite4 pinia2 TypeScript 基础框架**
--   cli 创建的 Vue3/Vite 项目 与 使用 HBuilderX 导入插件 的包有差异,请直接访问 [开源地址](https://gitee.com/h_mo/uniapp-vue3-vite-ts-template)
--   访问[uniapp 插件](https://ext.dcloud.net.cn/plugin?id=8559)
+-   **uni-app Vue3 Vite pinia2 TypeScript 基础框架**
 
 ### 说明
 
 -   框架完全基于 Vue3 SFC `<script setup>` 写法,不支持 Vue2;
--   可用于学习与交流;
--   目前测试 H5、微信小程序,APP(Android),支付宝小程序通过;
--   其他平台暂未测试,后续会增加;
--   如发现问题或建议可在评论区留言, 或提[Issues](https://gitee.com/h_mo/uniapp-vue3-vite-ts-template/issues)及[PR](https://gitee.com/h_mo/uniapp-vue3-vite-ts-template/pulls),会及时处理;
--   如有需求亦可在评论区留言,或在此项目基础上增加;
--   [代码规范 & 详细解释 husky、prettier、eslint、lint-staged 的作用和使用](https://blog.csdn.net/cookcyq__/article/details/125457031)
-
 ## 特性
 
 -   **最新技术栈**：使用 Vue3/Vite4/pinia ,TypeScript 等前端前沿技术开发;
@@ -125,26 +110,15 @@
 ├─ .gitignore
 ├─ .prettierignore
 ├─ .prettierrc.js
-├─ favicon.ico
 ├─ index.html
 ├─ package.json
 ├─ pnpm-lock.yaml
 ├─ README.md
-├─ tree.txt
 ├─ tsconfig.json
 └─ vite.config.ts
 
 ```
 
-## 预览
-
--   H5
-
-    ![h5](https://api-catch.ranesuangyu.top/images/20220621/364f2b47d91ae5ae82a33d33854e2540.png)
-
--   小程序(体验版-需申请体验)
-
-    ![小程序](http://api-catch.ranesuangyu.top/images/20220621/8d4388315ef5b8630d0c0b3963d1ba6b.jpg)
 
 ## 安装使用
 
@@ -176,14 +150,9 @@ pnpm up
 npx @dcloudio/uvm 3.7.2.20230217-alpha
 ```
 
-## Gitee 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
 
-## [Gitee 贡献提交规范](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
+## [Git 贡献提交规范](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
 
 ### 提交类型
 
@@ -203,15 +172,6 @@ npx @dcloudio/uvm 3.7.2.20230217-alpha
 | `release`  | 发布新版本         | \-                                                                                    |
 | `workflow` | 工作流相关文件修改 | \-                                                                                    |
 
-### 提交别名
-
-| 提交类型           | 映射到  | 标题     | 描述                       |
-| ------------------ | ------- | -------- | -------------------------- |
-| `initial`          | `feat`  | 最初的   | 初始提交                   |
-| `dependencies`     | `fix`   | 依赖项   | 更新依赖项                 |
-| `peerDependencies` | `fix`   | 对等依赖 | 更新对等依赖项             |
-| `devDependencies`  | `chore` | 开发依赖 | 更新开发依赖               |
-| `metadata`         | `fix`   | 元数据   | 更新元数据（package.json） |
 
 ### 快捷别名提示
 
