@@ -6,90 +6,96 @@ import { Toast } from '@/utils/uniapi/prompt';
 import { useRouter } from '@/hooks/router';
 import { useRequest } from 'alova';
 import { login } from '@/services/api/auth';
+import { ThemeEnum } from '@/enums/theme';
 
 const redirect = ref<string | undefined>(undefined);
 onLoad((query) => {
     redirect.value = query.redirect ? decodeURIComponent(query.redirect) : undefined;
 });
-
+const styles = {
+    borderColor: ThemeEnum.PRIMARY_COLOR,
+};
 const router = useRouter();
 
-const form = reactive({
+const form = ref<any>(null);
+const formData = reactive({
     email: 'uni-app@test.com',
     password: 'Vue3_Ts_Vite',
 });
+const rules = reactive({
+    email: {
+        rules: [
+            {
+                required: true,
+                message: '请输入邮箱',
+            },
+            {
+                format: 'email',
+                message: '请输入正确的邮箱',
+            },
+        ],
+    },
+    password: {
+        rules: [
+            {
+                required: true,
+                message: '请输入密码',
+            },
+        ],
+    },
+});
 const authStore = useAuthStore();
 const { send: sendLogin } = useRequest(login, { immediate: false });
-const submit = (e: any) => {
-    sendLogin(e.detail.value).then((res) => {
-        Toast('登录成功', { duration: 1500 });
-        authStore.setToken(res.token);
-        setTimeout(() => {
-            if (redirect.value) {
-                router.go(redirect.value!, { replace: true });
-                return;
-            }
-            router.pushTab('/pages/about/index');
-        }, 1500);
-    });
+const submitForm = (e: any) => {
+    form.value
+        .validate()
+        .then((params: any) => {
+            console.log('规则', rules);
+            console.log('表单数据信息：', params);
+            sendLogin(params).then((res) => {
+                Toast('登录成功', { duration: 1500 });
+                authStore.setToken(res.token);
+                setTimeout(() => {
+                    if (redirect.value) {
+                        router.go(redirect.value!, { replace: true });
+                        return;
+                    }
+                    router.pushTab('/pages/about/index');
+                }, 1500);
+            });
+        })
+        .catch((err: any) => {
+            console.log('表单错误信息：', err);
+        });
 };
 </script>
 
 <template>
-    <view class="container">
-        <view class="title">登录2</view>
-        <view class="form-wrap">
-            <form class="form" @submit="submit">
-                <label class="form-item">
-                    <view class="form-label">邮箱:</view>
-                    <view class="form-element"><input name="email" :value="form.email" /></view>
-                </label>
-                <label class="form-item">
-                    <view class="form-label">密码:</view>
-                    <view class="form-element"><input type="password" name="password" :value="form.password" /></view>
-                </label>
-                <button form-type="submit" class="submit-btn" hover-class="none">登录</button>
-            </form>
+    <view class="container px-6 text-left">
+        <view class="header flex flex-col">
+            <text class="title text-36 font-300">Login<uni-icons type="person-filled" size="18"></uni-icons></text>
+            <text class="subtitle text-28" :class="`text-${ThemeEnum.PRIMARY_COLOR}`">Welcome back , Rohit thakur</text>
+        </view>
+        <view class="content text-center">
+            <image class="logo" w-592 src="@/static/images/login.png" />
+            <text class="text-34 font-700" :class="`text-${ThemeEnum.PRIMARY_COLOR}`">Enter Your Mobile Number</text>
+            <uni-forms class="mt10" ref="form" :modelValue="formData" :rules="rules">
+                <uni-forms-item :labelWidth="0" name="email">
+                    <uni-easyinput type="text" :primaryColor="ThemeEnum.PRIMARY_COLOR" :styles="styles" v-model="formData.email" placeholder="请输入邮箱" />
+                </uni-forms-item>
+                <uni-forms-item :labelWidth="0" name="password">
+                    <uni-easyinput
+                        type="password"
+                        :primaryColor="ThemeEnum.PRIMARY_COLOR"
+                        :styles="styles"
+                        v-model="formData.password"
+                        placeholder="请输入密码"
+                    />
+                </uni-forms-item>
+            </uni-forms>
+            <button class="login-tbn mt10 rounded-2.5 bg-#F2796B text-#fff" @click="submitForm">Login</button>
         </view>
     </view>
 </template>
 
-<style lang="scss" scoped>
-.container {
-    margin: 0 auto;
-    width: 80%;
-    .title {
-        padding: 320rpx 0 32rpx 0;
-        text-align: center;
-    }
-    .form-wrap {
-        padding: 20rpx 24rpx;
-        box-shadow: 16rpx 16rpx 30rpx #e5e7eb;
-        .form {
-            .form-item {
-                display: flex;
-                height: 88rpx;
-                border-bottom: 2rpx solid #dbeafe;
-                align-items: center;
-                .form-label {
-                    min-width: 96rpx;
-                }
-                .form-element {
-                    flex-grow: 1;
-                }
-            }
-            .submit-btn {
-                margin-top: 44rpx;
-                border: 4rpx solid #bfdbfe;
-                background-color: #60a5fa;
-                border-radius: 8rpx;
-                font-size: 28rpx;
-                color: #ffffff;
-                :hover {
-                    background-color: #3b82f6;
-                }
-            }
-        }
-    }
-}
-</style>
+<style lang="scss" scoped></style>
