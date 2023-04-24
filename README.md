@@ -34,6 +34,7 @@
 ### 说明
 
 -   框架完全基于 Vue3 SFC `<script setup>` 写法,不支持 Vue2;
+
 ## 特性
 
 -   **最新技术栈**：使用 Vue3/Vite4/pinia ,TypeScript 等前端前沿技术开发;
@@ -48,77 +49,79 @@
 
 ```shell
 .
-├─ src
-│   ├─assets # 静态资源目录
-│   │
-│   ├─components # 组件目录
-│   │   ├─ BasicButton
-│   │   │    ├─index.vue
-│   │   │    └─prpos.ts
-│   │   └─...
-│   │
-│   ├─enums # 枚举/常量
-│   │   ├─ cacheEnum.ts
-│   │   └─...
-│   │
-│   ├─pages # 页面
-│   │   ├─ index
-│   │   │    └─index.vue
-│   │   └─...
-│   │
-│   ├─services # 接口相关
-│   │   ├─ api # api
-│   │   │    ├─auth.ts
-│   │   │    └─...
-│   │   │
-│   │   └─ model # 数据模型
-│   │        ├─authModel.d.ts
-│   │        └─...
-│   │
-│   ├─settings # 设置
-│   │   └─ encryptionSetting # 加密设置
-│   │
-│   ├─state # 状态管理模式(pinia)
-│   │   ├─ modules # 数据模块
-│   │   │    ├─auth.ts
-│   │   │    └─...
-│   │   │
-│   │   └─ index.ts
-│   │
-│   ├─static # 静态公共文件
-│   │   ├─ images # 图片
-│   │   │    ├─avatar.png
-│   │   │    └─...
-│   │   │
-│   │   └─ ...
-│   │
-│   ├─types # 类型文件
-│   │   ├─ http.d.ts
-│   │   └─ ...
-│   │
-│   └─utils # 工具类
-│       ├─ cache # 缓存相关目录
-│       ├─ http  # request相关目录
-│       ├─ interceptors  # 拦截器相关目录
-│       └─ ...
-│
-├─ .env
-├─ .env.development
-├─ .env.production
-├─ .eslintignore
-├─ .eslintrc.js
-├─ .gitignore
-├─ .prettierignore
-├─ .prettierrc.js
-├─ index.html
-├─ package.json
-├─ pnpm-lock.yaml
-├─ README.md
-├─ tsconfig.json
-└─ vite.config.ts
+├── src
+│   ├── App.vue
+│   ├── androidPrivacy.json
+│   ├── assets # 静态资源目录
+│   │   └── main.scss
+│   ├── components # 组件目录
+│   │   ├── AppProvider
+│   │   │   └── inedx.vue
+│   │   └── ...
+│   ├── enums # 枚举/常量
+│   │   ├── appEnum.ts
+│   │   └── ...
+│   ├── env.d.ts
+│   ├── hooks # 自定义hook
+│   │   ├── ...
+│   │   ├── useI18n.ts
+│   │   └── ...
+│   ├── locale # 国际化
+│   │   ├── en.json
+│   │   └── ...
+│   ├── main.ts
+│   ├── manifest.json
+│   ├── mock
+│   │   ├── index.ts
+│   │   ├── utils.ts
+│   │   └── v1
+│   │       ├── index.ts
+│   │       └── modules
+│   │           └── auth.ts
+│   ├── pages # 页面
+│   │   ├── about
+│   │   │   └── index.vue
+│   │   └── ...
+│   ├── services # 接口相关
+│   │   ├── api
+│   │   │   ├── auth.ts
+│   │   │   └── user.ts
+│   │   └── ...
+│   ├── settings # 设置
+│   │   └── encryptionSetting.ts # 加密设置
+|   |
+│   ├── static # 静态公共文件
+│   │   ├── images
+│   │   │   ├── avatar.png
+│   │   │   ├── ...
+│   │   └── ...
+│   ├── stores # 状态存储
+│   │   ├── app.ts
+│   │   ├── index.ts
+│   │   └── modules
+│   │       ├── auth.ts
+│   │       ├── router.ts
+│   │       └── user.ts
+│   ├── types # 类型文件
+│   │   ├── env.d.ts
+│   │   └── ...
+│   |
+│   └── utils # 工具类
+│       ├── auth.ts
+│       └── ...
+|
+├── README.md
+├── commitlint.config.cjs
+├── index.html
+├── jest.config.js
+├── package.json
+├── pnpm-lock.yaml
+├── tsconfig.json
+├── unocss.config.js
+├── vite.config.ts
+└── vue.config.js
 
 ```
-
 
 ## 安装使用
 
@@ -150,8 +153,6 @@ pnpm up
 npx @dcloudio/uvm 3.7.2.20230217-alpha
 ```
 
-
-
 ## [Git 贡献提交规范](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
 
 ### 提交类型
@@ -171,7 +172,6 @@ npx @dcloudio/uvm 3.7.2.20230217-alpha
 | `revert`   | 还原               | 恢复之前的提交                                                                        |
 | `release`  | 发布新版本         | \-                                                                                    |
 | `workflow` | 工作流相关文件修改 | \-                                                                                    |
-
 
 ### 快捷别名提示
 
