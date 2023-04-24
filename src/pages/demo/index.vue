@@ -24,6 +24,9 @@ onShow(() => {
         <view class="_u_center">
             <BasicButton @click="jumpList1">List1 → </BasicButton>
         </view>
+        <uni-badge :text="20" type="primary" size="normal" />
+        <image src="https://img.yzcdn.cn/vant/logo.png" mode="scaleToFill" />
+        <button :disabled="false" :loading="true" open-type="" hover-class="button-hover" @click="jumpList1"></button>
     </AppProvider>
 </template>
 
