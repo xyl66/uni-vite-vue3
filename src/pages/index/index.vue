@@ -7,16 +7,15 @@ import Iconify from '@/components/Iconify/index.vue';
 import { getEnvValue } from '@/utils/env';
 import { useI18n } from '@/hooks/useI18n';
 import { computed } from 'vue';
-import { i18n } from '@/locale';
+import { LOCALE } from '@/locale';
 import { onLoad } from '@dcloudio/uni-app';
 
-const { t } = useI18n();
+const { t, setLocale } = useI18n();
 const appTitle = getEnvValue<string>('VITE_APP_TITLE');
 
 const title = ref(appTitle);
 
 const systemInfo = uni.getSystemInfoSync();
-const isAndroid = systemInfo.platform.toLowerCase() === 'android';
 
 const applicationLocale = ref();
 const systemLocale = ref();
@@ -47,21 +46,9 @@ const handleGetStarted = () => {
     router.pushTab('/pages/demo/index');
     // router.push('/pages/log/index?id=4345&title=log');
 };
-const onLocaleChange = (e) => {
-    if (isAndroid) {
-        uni.showModal({
-            content: t('index.language-change-confirm'),
-            success: (res) => {
-                if (res.confirm) {
-                    uni.setLocale(e.code);
-                }
-            },
-        });
-    } else {
-        uni.setLocale(e);
-        i18n.global.locale = e;
-        applicationLocale.value = e;
-    }
+const onLocaleChange = (e: LOCALE) => {
+    setLocale(e);
+    applicationLocale.value = e;
 };
 onLoad(() => {
     applicationLocale.value = uni.getLocale();

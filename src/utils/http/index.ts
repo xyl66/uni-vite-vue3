@@ -46,6 +46,7 @@ const alovaInstance = createAlova({
             // @ts-ignore
             const { statusCode, data: rawData } = response;
             const { code, message, data } = rawData as API;
+            console.log('code', code);
             if (statusCode === 200) {
                 if (enableDownload) {
                     // 下载处理
@@ -72,7 +73,6 @@ const alovaInstance = createAlova({
          * @param method
          */
         onError: (err, method) => {
-            // error('Request Error!');
             return Promise.reject({ err, method });
         },
     },

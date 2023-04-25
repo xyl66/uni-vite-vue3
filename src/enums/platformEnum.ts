@@ -107,3 +107,11 @@ function PLATFORM_ENV() {
 
 /* 当前平台 */
 export const CURRENT_PLATFORM = PLATFORM_ENV();
+
+/**
+ * 客户端类型
+ */
+export enum CLIENT_TYPES {
+    ANDROID = 'android' /* 安卓 */,
+    IOS = 'ios' /* 苹果 */,
+}

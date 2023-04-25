@@ -4,11 +4,17 @@ import en from './en.json';
 import zhHans from './zh-Hans.json';
 import zhHant from './zh-Hant.json';
 import ja from './ja.json';
-const messages = {
-    en,
-    'zh-Hans': zhHans,
-    'zh-Hant': zhHant,
-    ja,
+export enum LOCALE {
+    EN = 'en',
+    ZH_HANS = 'zh-Hans',
+    ZH_HANT = 'zh-Hant',
+    JA = 'ja',
+}
+const messages: Record<LOCALE, Record<string, string>> = {
+    [LOCALE.EN]: en,
+    [LOCALE.ZH_HANS]: zhHans,
+    [LOCALE.ZH_HANT]: zhHant,
+    [LOCALE.JA]: ja,
 };
 
 export let i18n: ReturnType<typeof createI18n>;

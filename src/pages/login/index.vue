@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { useAuthStore } from '@/stores/modules/auth';
-import { Toast } from '@/utils/uniapi/prompt';
+import { Modal, Toast } from '@/utils/uniapi/prompt';
 import { useRouter } from '@/hooks/router';
 import { useRequest } from 'alova';
 import { login } from '@/services/api/auth';
@@ -17,6 +17,7 @@ const styles = {
 };
 const router = useRouter();
 
+const loading = ref(false);
 const form = ref<any>(null);
 const formData = reactive({
     email: 'uni-app@test.com',
@@ -52,17 +53,30 @@ const submitForm = () => {
         .then((params: any) => {
             console.log('规则', rules);
             console.log('表单数据信息：', params);
-            sendLogin(params).then((res) => {
-                Toast('登录成功', { duration: 1500 });
-                authStore.setToken(res.token);
-                setTimeout(() => {
-                    if (redirect.value) {
-                        router.go(redirect.value!, { replace: true });
-                        return;
-                    }
-                    router.pushTab('/pages/about/index');
-                }, 1500);
-            });
+            loading.value = true;
+            sendLogin(params)
+                .then((res) => {
+                    Toast('登录成功', { duration: 1500 });
+                    authStore.setToken(res.token);
+                    setTimeout(() => {
+                        if (redirect.value) {
+                            router.go(redirect.value!, { replace: true });
+                            return;
+                        }
+                        router.pushTab('/pages/about/index');
+                    }, 1500);
+                })
+                .catch(({ err }) => {
+                    console.log('登录失败', err.message);
+                    Modal({
+                        title: '登录失败',
+                        content: err.message,
+                        showCancel: false,
+                    });
+                })
+                .finally(() => {
+                    loading.value = false;
+                });
         })
         .catch((err: any) => {
             console.log('表单错误信息：', err);
@@ -93,7 +107,7 @@ const submitForm = () => {
                     />
                 </uni-forms-item>
             </uni-forms>
-            <button class="login-tbn mt10 rounded-2.5 bg-#F2796B text-#fff" @click="submitForm">Login</button>
+            <button class="login-tbn mt10 rounded-2.5 bg-#F2796B text-#fff" :loading="loading" @click="submitForm">Login</button>
         </view>
     </view>
 </template>

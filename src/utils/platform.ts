@@ -1,4 +1,4 @@
-import { PLATFORMS } from '@/enums/platformEnum';
+import { CLIENT_TYPES, PLATFORMS } from '@/enums/platformEnum';
 
 /**
  * 判断是否是某个平台环境
@@ -121,4 +121,8 @@ export function judgePlatform(target: PLATFORMS): boolean {
         default:
             return false;
     }
+}
+export function judgeClient(target: CLIENT_TYPES): boolean {
+    const systemInfo = uni.getSystemInfoSync();
+    return systemInfo.platform.toLowerCase() === target.toLowerCase();
 }

@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { i18n } from '@/locale';
+import { CLIENT_TYPES } from '@/enums/platformEnum';
+import { LOCALE, i18n } from '@/locale';
+import { judgeClient } from '@/utils/platform';
 
 type I18nGlobalTranslation = {
     (key: string): string;
@@ -24,6 +26,7 @@ function getKey(namespace: string | undefined, key: string) {
 
 export function useI18n(namespace?: string): {
     t: I18nGlobalTranslation;
+    setLocale: (local: LOCALE) => void;
 } {
     const normalFn = {
         t: (key: string) => {
@@ -42,8 +45,26 @@ export function useI18n(namespace?: string): {
         if (!key.includes('.') && !namespace) return key;
         return t(getKey(namespace, key), ...(arg as I18nTranslationRestParameters));
     };
+
+    const setLocale = (local: LOCALE) => {
+        if (judgeClient(CLIENT_TYPES.ANDROID)) {
+            uni.showModal({
+                content: t('index.language-change-confirm'),
+                success: (res) => {
+                    if (res.confirm) {
+                        uni.setLocale(local);
+                    }
+                },
+            });
+        } else {
+            uni.setLocale(local);
+            i18n.global.locale = local;
+        }
+        return local;
+    };
     return {
         ...methods,
         t: tFn,
+        setLocale,
     };
 }
